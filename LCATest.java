@@ -51,5 +51,12 @@ public class LCATest {
 		assertEquals(null ,rootNode.right);
 		assertEquals(3 ,rootNode.value);
 	}
+	
+	@Test
+	public void testNullTree() {
+		assertNull(tree.root.value);
+	}
+
+	}
 
 }
