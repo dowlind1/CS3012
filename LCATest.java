@@ -34,6 +34,13 @@ public class LCATest {
         tree.root.left.right.right = new Node(4);
         
         assertEquals(3 ,tree.findLCA(1, 5));
+		assertEquals(3 ,tree.findLCA(5, 1));//order changed
+		assertEquals(3 ,tree.findLCA(3, 5));//checked that LCA can still be parent
+		assertEquals(3 ,tree.findLCA(1, 3));
+		
+		assertEquals(3 ,tree.findLCA(6, 1));
+		assertEquals(2 ,tree.findLCA(7, 4));
+		assertEquals(1 ,tree.findLCA(0, 8));
 	}
 
 }
