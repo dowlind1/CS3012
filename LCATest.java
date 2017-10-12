@@ -6,9 +6,12 @@ public class LCATest {
 	
 //	Prior to starting my code I am going to want to test all expected areas. 
 //	Need to test the LCA for two given nodes
-//	    ______5______
+//	
+//	Visualizing a Binary Tree like so:
+//	
+//	    ______3______
 //     /             \
-//   __5__          __3__
+//   __5__          __1__
 //  /     \        /     \
 // 6       2      0       8
 //        / \
