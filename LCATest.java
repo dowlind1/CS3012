@@ -32,6 +32,8 @@ public class LCATest {
         tree.root.right.right = new Node(8);
         tree.root.left.right.left = new Node(7);
         tree.root.left.right.right = new Node(4);
+        
+        assertEquals(3 ,tree.findLCA(1, 5));
 	}
 
 }
