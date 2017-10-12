@@ -21,7 +21,7 @@ public class LCATest {
 	LCA tree = new LCA();
 	
 	@Test
-	public void test() {
+	public void testTree() {
 		
         tree.root = new Node(3);
         tree.root.left = new Node(5);
@@ -41,6 +41,15 @@ public class LCATest {
 		assertEquals(3 ,tree.findLCA(6, 1));
 		assertEquals(2 ,tree.findLCA(7, 4));
 		assertEquals(1 ,tree.findLCA(0, 8));
+	}
+	
+	@Test
+	public void testConstructor() {
+		
+		Node rootNode = new Node(3);//only the root node 
+		assertEquals(null ,rootNode.left);
+		assertEquals(null ,rootNode.right);
+		assertEquals(3 ,rootNode.value);
 	}
 
 }
