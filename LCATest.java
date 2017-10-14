@@ -22,17 +22,7 @@ public class LCATest {
 
 	@Test
 	public void testTree() {
-
-		// here I am building a tree with values
-		tree.root = new Node(3);
-		tree.root.left = new Node(5);
-		tree.root.right = new Node(1);
-		tree.root.left.left = new Node(6);
-		tree.root.left.right = new Node(2);
-		tree.root.right.left = new Node(0);
-		tree.root.right.right = new Node(8);
-		tree.root.left.right.left = new Node(7);
-		tree.root.left.right.right = new Node(4);
+		createTree();
 
 		//testing that the LCA function is working when I implement it, order should not matter
 		assertEquals("LCA = 3",3 ,tree.findLCA(1, 5));
@@ -74,16 +64,7 @@ public class LCATest {
 	
 	@Test
 	public void testNonExistingNodes(){
-		
-		tree.root = new Node(3);
-		tree.root.left = new Node(5);
-		tree.root.right = new Node(1);
-		tree.root.left.left = new Node(6);
-		tree.root.left.right = new Node(2);
-		tree.root.right.left = new Node(0);
-		tree.root.right.right = new Node(8);
-		tree.root.left.right.left = new Node(7);
-		tree.root.left.right.right = new Node(4);
+		createTree();
 		
 		//one element doesn't exist
 		assertEquals("Will equal to -1 if does not exist",-1 ,tree.findLCA(1, 23));
@@ -94,16 +75,7 @@ public class LCATest {
 	
 	@Test
 	public void testSameNode(){
-		
-		tree.root = new Node(3);
-		tree.root.left = new Node(5);
-		tree.root.right = new Node(1);
-		tree.root.left.left = new Node(6);
-		tree.root.left.right = new Node(2);
-		tree.root.right.left = new Node(0);
-		tree.root.right.right = new Node(8);
-		tree.root.left.right.left = new Node(7);
-		tree.root.left.right.right = new Node(4);
+		createTree();
 		
 		//same root element, LCA is the element and the root
 		assertEquals("LCA = null",3 ,tree.findLCA(3, 3));
@@ -115,6 +87,20 @@ public class LCATest {
 		//same non root element, LCA is the element itself
 		assertEquals("LCA = 1",1 ,tree.findLCA(1, 1));
 		assertEquals("LCA = 5",5 ,tree.findLCA(5, 5));
+	}
+	
+	//Method to create a tree prevent duplication of code
+	public void createTree(){
+		tree.root = new Node(3);
+		tree.root.left = new Node(5);
+		tree.root.right = new Node(1);
+		tree.root.left.left = new Node(6);
+		tree.root.left.right = new Node(2);
+		tree.root.right.left = new Node(0);
+		tree.root.right.right = new Node(8);
+		tree.root.left.right.left = new Node(7);
+		tree.root.left.right.right = new Node(4);
+		
 	}
 	
 
