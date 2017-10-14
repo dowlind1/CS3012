@@ -11,5 +11,8 @@ Some of the tests I am going to be looking for:
 
 4. Test a small tree(at least 2 nodes - including root)
 
+3. Test same node/elements for LCA
+
 5. Test for non existing nodes in tree
 
+The tests have been built and time to construct the code to implement the LCA
