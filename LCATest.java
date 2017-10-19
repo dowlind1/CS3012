@@ -17,7 +17,6 @@ public class LCATest {
 	//        / \
 	//       7   4
 
-
 	LCA tree = new LCA();
 
 	@Test
@@ -45,7 +44,7 @@ public class LCATest {
 
 	@Test
 	public void testNullTree() {
-		assertNull(tree.root.value);
+		assertNull(tree.root);
 	}
 
 	@Test
@@ -57,7 +56,7 @@ public class LCATest {
 		assertEquals(3 ,tree.findLCA(3, 5));
 		assertEquals(3 ,tree.findLCA(5, 3));
 		assertEquals(5 ,tree.root.left.value);
-		assertNull(tree.root.right.value);
+		assertNull(tree.root.right);
 		//assertEquals(null ,tree.root.right.value);
 		assertEquals(3 ,tree.root.value);
 	}
@@ -69,7 +68,7 @@ public class LCATest {
 		//one element doesn't exist
 		assertEquals("Will equal to -1 if does not exist",-1 ,tree.findLCA(1, 23));
 		//neither elements exist
-		assertNotEquals("Will equal to -2 if neither exist",-2,tree.findLCA(9,10));
+		assertNotEquals("Will equal to -2 if neither exist",null,tree.findLCA(9,10));
 		assertEquals("LCA = null",3 ,tree.findLCA(3, 3));
 	}
 	
@@ -100,8 +99,5 @@ public class LCATest {
 		tree.root.right.right = new Node(8);
 		tree.root.left.right.left = new Node(7);
 		tree.root.left.right.right = new Node(4);
-		
 	}
-	
-
 }

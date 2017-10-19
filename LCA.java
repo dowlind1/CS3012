@@ -3,12 +3,6 @@ import java.util.List;
 
 public class LCA {
 
-	//	Node root;//Calling in the node class
-	//	
-	//	public int findLCA(int v, int w){
-	//		return -1;
-	//	}
-	//	
 	/**
 	 * I found a good solution online and will use this for my assignment. As recommended we try not to reinvent the wheel in our studies
 	 * Name of website is GeeksforGeeks and the url is: http://www.geeksforgeeks.org/lowest-common-ancestor-binary-tree-set-1/
@@ -18,7 +12,7 @@ public class LCA {
 	private List<Integer> path1 = new ArrayList<>();
 	private List<Integer> path2 = new ArrayList<>();
 
-	int findLCA(int v, int w) {
+	public int findLCA(int v, int w) {
 		path1.clear();
 		path2.clear();
 		return findLCA(root, v, w);
@@ -26,22 +20,19 @@ public class LCA {
 
 	private int findLCA(Node root, int v, int w) {
 		if (!findPath(root, v, path1) || !findPath(root, w, path2)) {
-			System.out.println((path1.size() > 0) ? "v is present" : "v is missing");
-			System.out.println((path2.size() > 0) ? "w is present" : "w is missing");
 			return -1;
 		}
 		int i;
 		for (i = 0; i < path1.size() && i < path2.size(); i++) {
-			//  System.out.println(path1.get(i) + " " + path2.get(i));
 			if (!path1.get(i).equals(path2.get(i)))
 				break;
 		}
-			return path1.get(i-1);
+		return path1.get(i-1);
 	}
 
 	private boolean findPath(Node root, int n, List<Integer> path)
 	{
-		if(n<0){
+		if(n<0){//will not allow negative numbers in BT
 			return false;
 		}
 		if (root == null) {
@@ -62,9 +53,18 @@ public class LCA {
 	}
 
 
-	//	public static void main(String[] args) {
-	//		// TODO Auto-generated method stub
-	//
-	//	}
+	public static void main(String[] args) {
+		LCA tree = new LCA();
+		tree.root = new Node(3);
+		tree.root.left = new Node(5);
+		tree.root.right = new Node(1);
+		tree.root.left.left = new Node(6);
+		tree.root.left.right = new Node(2);
+		tree.root.right.left = new Node(0);
+		tree.root.right.right = new Node(8);
+		tree.root.left.right.left = new Node(7);
+		tree.root.left.right.right = new Node(4);
+
+	}
 
 }
