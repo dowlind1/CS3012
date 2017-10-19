@@ -68,7 +68,7 @@ public class LCATest {
 		//one element doesn't exist
 		assertEquals("Will equal to -1 if does not exist",-1 ,tree.findLCA(1, 23));
 		//neither elements exist
-		assertNotEquals("Will equal to -2 if neither exist",null,tree.findLCA(9,10));
+		assertEquals("Will equal to -2 if neither exist",-1,tree.findLCA(9,10));
 		assertEquals("LCA = null",3 ,tree.findLCA(3, 3));
 	}
 	
