@@ -1,3 +1,5 @@
+//Anyone reading this, can you enlighten if I will need another method to be tested
+
 import static org.junit.Assert.*;
 
 public class NodeTest{
@@ -48,7 +50,22 @@ public class NodeTest{
    */
   @Test
   public void removeEdgeTest(){
-  
+  	a.addEdge(d);
+	assertEquals("Size should be 1",1,a.edgesTo.size());
+	b.addEdge(c);
+	assertEquals("Size should be 1",1,b.edgesTo.size());
+	a.addEdge(c);
+	assertEquals("Size should be 2",2,a.edgesTo.size());
+	d.removeEdge(d);
+	assertEquals("Removing something a connection of itself, should 0 as there should be no loop",0,d.edgesTo.size());
+	a.removeEdge(c);
+	assertEquals("One removed, size should be 1",1,a.edgesTo.size());
+	b.removeEdge(d);
+	assertEquals("Removing something that does not exist, size not be affected and equal to with still having c",1,a.edgesTo.size());
+	b.removeEdge(c);
+	assertEquals("Last one removed",0,b.edgesTo.size());
+	a.removeEdge(null);
+	assertEquals("We saw that adding a null does nothing, removing one should be",1,a.edgesTo.size());
   }
   
   //Still thinking of further tests to put in. 
