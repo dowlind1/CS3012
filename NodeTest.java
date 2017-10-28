@@ -8,16 +8,17 @@ public class NodeTest{
   
   @Test
   public void constructorTest(){//test the constructor is being set up right
-    //took two nodes to show no connection has been made 
+    //took two nodes to show no connection has been made
     //also that the constructor will set them up the way I expect to need them
-    assertEquals("Test the value in node a","a" ,a.value);
-		assertEquals("Test the value in node b","b" ,b.value);
-		assertEquals("Confirm a is not connected to anything yet",0 ,a.outdegree);
-		assertEquals("Confirm b is not connected to anything yet",0 ,b.outdegree);
-		assertEquals("Confirm a is not connected to anything yet",0 ,a.indegree);
-		assertEquals("Confirm b is not connected to anything yet",0 ,b.indegree);
-		assertEquals("Confirm a is not connected to anything yet",true ,a.edgesTo.isEmpty());
-		assertEquals("Confirm b is not connected to anything yet",true ,b.edgesTo.isEmpty());
+	//outdegree should equal the size of the edgesTo array as each edge to another v will be stored in the initial nodes's array
+    	assertEquals("Test the value in node a","a" ,a.value);
+	assertEquals("Test the value in node b","b" ,b.value);
+	assertEquals("Confirm a is not connected to anything yet",0 ,a.outdegree);
+	assertEquals("Confirm b is not connected to anything yet",0 ,b.outdegree);
+	assertEquals("Confirm a is not connected to anything yet",0 ,a.indegree);
+	assertEquals("Confirm b is not connected to anything yet",0 ,b.indegree);
+	assertEquals("Confirm a is not connected to anything yet",true ,a.edgesTo.isEmpty());
+	assertEquals("Confirm b is not connected to anything yet",true ,b.edgesTo.isEmpty());
   }
   
   /**
@@ -26,7 +27,19 @@ public class NodeTest{
    */
   @Test
   public void addEdgeTest(){
-  
+  	assertEquals("a should start off with 0, before adding and edge",0,a.edgesTo.size());
+	a.addEdge(b);
+	assertEquals("Test that null will not have an effect, should be 1",1,a.edgesTo.size());
+	assertEquals("b should still be empty as no connections from b made, should be 0",0,b.edgesTo.size());
+	b.addEdge(null);
+	assertEquals("Test that null will not have an effect, should be 0",0,b.edgesTo.size());
+	b.addEdge(a);
+	assertTrue(b.edgesTo.size()==1);
+	assertEquals("Test the size increase in a, should be 1",1,b.edgesTo.size());
+	a.addEdge(c);
+	assertEquals("Test the size increase in a, should be 2",2,a.edgesTo.size());
+	a.addEdge(d);
+	assertEquals("Test the size increase in a, should be 3",3,a.edgesTo.size());  
   }
   
   /**
