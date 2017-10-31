@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class DAGTest {
 	
-	DAG acyclic =new DAG(9);//create a acyclic graph
+	DAG acyclic =new DAG(10);//create a acyclic graph
 	DAG cycle = new DAG(9);//create a cycle graph
 	
 	//testing the set up of the constructor
@@ -45,7 +45,10 @@ public class DAGTest {
 	//test the number of vertices within a graph
 	@Test
 	public void testV(){
-	
+		acyclicGraph();
+		cycleGraph();
+		assertEquals("Number of vertices within the graph should be 9", 10, acyclic.V());
+		assertEquals("Number of vertices within the graph should be 9", 9, cycle.V());
 	}
 	
 	//test that the vertex passed through is valid for the graph(Nonnegative
