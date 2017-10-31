@@ -18,7 +18,11 @@ public class DAGTest {
 	//Test the indegree of a vertex in the graph
 	@Test(expected = IllegalArgumentException.class)
 	public void testIndegree(){
-		
+		acyclicGraph();//has no cycle
+		cycleGraph();//has cycle
+		assertEquals("fails due the exception thrown", null, acyclic.indegree(-3));
+		assertEquals("A straight line of vertices so each will only have one", 1, acyclic.indegree(5));
+		assertEquals("2 edges leading into vertex eight", 2, cycle.indegree(8));
 	}
 	
 	//Test the outdegree of a vertex in the graph
@@ -26,9 +30,9 @@ public class DAGTest {
 	public void testOutdegree(){
 		acyclicGraph();//has no cycle
 		cycleGraph();//has cycle
-		assertEquals("", null, acyclic.outdegree(9));//fails due the exception thrown	
-		assertEquals("", 1, acyclic.outdegree(0));	
-		assertEquals("", 2, cycle.outdegree(0));
+		assertEquals("fails due to the exception thrown for out of bounds number", null, acyclic.outdegree(9));
+		assertEquals("0 only has one outdegree", 1, acyclic.outdegree(0));	
+		assertEquals("0 for the cycle graph has two outdegree edges", 2, cycle.outdegree(0));
 	}
 	
 	//Test the adjacency array
@@ -36,8 +40,8 @@ public class DAGTest {
 	public void testAdj(){
 		acyclicGraph();//has no cycle
 		cycleGraph();//has cycle
-		assertEquals("","[4]", acyclic.adj(3).toString());
-		assertEquals("","[1, 6]", cycle.adj(3).toString());
+		assertEquals("Adjacency array of 3 only travels to one vertex","[4]", acyclic.adj(3).toString());
+		assertEquals("Adjacency array of 3 in a cycle graph has two outdegrees to one and six","[1, 6]", cycle.adj(3).toString());
 	}
 	
 	//test the amount of edges with in a graph
