@@ -92,7 +92,10 @@ public class DAGTest {
 	//with in the graph
 	@Test
 	public void testCycle(){
-		
+		acyclicGraph();//has no cycle
+		cycleGraph();//has cycle
+		assertFalse(acyclic.hasCycle());//it is acyclic
+		assertTrue(cycle.hasCycle());//there exists a cycle within the graph
 	}
 	
 	//test DFS 
