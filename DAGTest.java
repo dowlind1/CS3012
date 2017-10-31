@@ -5,11 +5,14 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class DAGTest {
-
+	
+	DAG acyclic =new DAG(8);//create a acyclic graph
+	DAG cycle = new DAG(8);//create a cycle graph
+	
 	//testing the set up of the constructor
-	@Test
+	@Test(expected = IllegalArgumentException.class)//must be non-negative
 	public void testDAG() {
-		
+		DAG negativeTest = new DAG(-2);//will throw IllegalException if out of bounds
 	}
 	
 	//Test the indegree of a vertex in the graph
@@ -71,4 +74,30 @@ public class DAGTest {
 	public void testLCA(){
 		
 	}
+	
+	//function to create an acyclic graph that I will use in the tests
+	public void acylcicGraph(){
+		acyclic.addEdge(0, 1);
+		acyclic.addEdge(0, 5);
+		acyclic.addEdge(1, 2);
+		acyclic.addEdge(1, 4);
+		acyclic.addEdge(5, 3);
+		acyclic.addEdge(3, 6);
+		acyclic.addEdge(6, 7);
+		acyclic.addEdge(6, 8);
+		acyclic.addEdge(7, 8);
+	}
+	
+	//function to create an graph(that cycles) that I will use in the tests
+	public void cycleGraph(){
+		cycle.addEdge(0, 1);
+		cycle.addEdge(0, 2);
+		cycle.addEdge(1, 2);
+		cycle.addEdge(2, 4);
+		cycle.addEdge(4, 3);
+		cycle.addEdge(3, 1);
+		cycle.addEdge(3, 6);
+		cycle.addEdge(6, 8);
+		cycle.addEdge(7, 8);
+	}	
 }
