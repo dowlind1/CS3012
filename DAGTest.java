@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class DAGTest {
 	
-	DAG acyclic =new DAG(10);//create a acyclic graph
+	DAG acyclic =new DAG(9);//create a acyclic graph
 	DAG cycle = new DAG(9);//create a cycle graph
 	
 	//testing the set up of the constructor
@@ -49,7 +49,7 @@ public class DAGTest {
 	public void testE(){
 		acyclicGraph();
 		cycleGraph();
-		assertEquals("Number of edges within the graph should be 9", 9, acyclic.E());
+		assertEquals("Number of edges within the graph should be 7", 7, acyclic.E());
 		assertEquals("Number of edges within the graph should be 9", 9, cycle.E());
 	}
 	
@@ -58,7 +58,7 @@ public class DAGTest {
 	public void testV(){
 		acyclicGraph();
 		cycleGraph();
-		assertEquals("Number of vertices within the graph should be 9", 10, acyclic.V());
+		assertEquals("Number of vertices within the graph should be 9", 9, acyclic.V());
 		assertEquals("Number of vertices within the graph should be 9", 9, cycle.V());
 	}
 	
@@ -79,7 +79,13 @@ public class DAGTest {
 	//test that adding an edge between two vertices crates a connection
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddEdge(){
-		
+		acyclicGraph();//has no cycle
+		cycleGraph();//has cycle
+		assertEquals("Number of edges for DAG is", 7, acyclic.E());
+		acyclic.addEdge(5, 8);
+		assertEquals("Number of edges for DAG should increase to", 8, acyclic.E());
+		acyclic.addEdge(-1, -1);
+		assertEquals("This should do nothing as an exception is thrown, once the values are validated", null, acyclic.E());
 	}
 	
 	//test that the graph is acyclic, if there is a cycle the method will throw true that there is a cycle
@@ -103,13 +109,11 @@ public class DAGTest {
 	//function to create an acyclic graph that I will use in the tests
 	public void acylcicGraph(){
 		acyclic.addEdge(0, 1);
-		acyclic.addEdge(0, 5);
-		acyclic.addEdge(1, 2);
-		acyclic.addEdge(1, 4);
-		acyclic.addEdge(5, 3);
-		acyclic.addEdge(3, 6);
+		acyclic.addEdge(2, 3);
+		acyclic.addEdge(3, 4);
+		acyclic.addEdge(4, 5);
+		acyclic.addEdge(5, 6);
 		acyclic.addEdge(6, 7);
-		acyclic.addEdge(6, 8);
 		acyclic.addEdge(7, 8);
 	}
 	
