@@ -54,7 +54,15 @@ public class DAGTest {
 	//test that the vertex passed through is valid for the graph(Nonnegative
 	@Test(expected = IllegalArgumentException.class)
 	public void testValidVertex(){
-		
+		DAG validTest = new DAG(3);
+		//try add negative values, will throw exception
+		validTest.addEdge(-1, 2);
+		validTest.addEdge(1, -2);
+		validTest.addEdge(-1, -2);
+		assertEquals("Should contain no edges", 0, validTest.E());
+		//will not throw exception, but let it pass through
+		validTest.addEdge(1, 2);
+		assertEquals("Should contain 1 edge", 1, validTest.E());
 	}
 	
 	//test that adding an edge between two vertices crates a connection
