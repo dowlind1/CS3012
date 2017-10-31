@@ -106,7 +106,15 @@ public class DAGTest {
   //Testing the LCA method, will test for various problems that may arise
 	@Test(expected = IllegalArgumentException.class) 
 	public void testLCA(){
-		
+		//test the lca for both acyclic and cycled graph using two vertices
+		assertEquals("Can be its own ancestor", 3, acyclic.findLCA(2, 3));
+		assertEquals("The cycle should revert back around", 1, cycle.findLCA(1, 4));
+		assertEquals("", 7, directAcyclic.findLCA(3, 4));
+		//same v as w
+		assertEquals("Can be its own ancestor", 3, acyclic.findLCA(3, 3));
+		//empty graph
+		DAG validTest = new DAG(0);
+		assertEquals("Can be its own ancestor", null, acyclic.findLCA(3, 3));//should throw exception
 	}
 	
 	//function to create an acyclic graph that I will use in the tests
