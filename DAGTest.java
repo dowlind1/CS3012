@@ -6,8 +6,8 @@ import org.junit.Test;
 
 public class DAGTest {
 	
-	DAG acyclic =new DAG(8);//create a acyclic graph
-	DAG cycle = new DAG(8);//create a cycle graph
+	DAG acyclic =new DAG(9);//create a acyclic graph
+	DAG cycle = new DAG(9);//create a cycle graph
 	
 	//testing the set up of the constructor
 	@Test(expected = IllegalArgumentException.class)//must be non-negative
@@ -36,7 +36,10 @@ public class DAGTest {
 	//test the amount of edges with in a graph
 	@Test
 	public void testE(){
-		
+		acyclicGraph();
+		cycleGraph();
+		assertEquals("Number of edges within the graph should be 9", 9, acyclic.E());
+		assertEquals("Number of edges within the graph should be 9", 9, cycle.E());
 	}
 	
 	//test the number of vertices within a graph
