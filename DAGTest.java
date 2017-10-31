@@ -6,8 +6,9 @@ import org.junit.Test;
 
 public class DAGTest {
 	
-	DAG acyclic =new DAG(9);//create a acyclic graph
+	DAG acyclic =new DAG(8);//create an acyclic graph
 	DAG cycle = new DAG(9);//create a cycle graph
+	DAG directAcyclic = new DAG(9);//creates an acyclic graph
 	
 	//testing the set up of the constructor
 	@Test(expected = IllegalArgumentException.class)//must be non-negative
@@ -49,8 +50,10 @@ public class DAGTest {
 	public void testE(){
 		acyclicGraph();
 		cycleGraph();
-		assertEquals("Number of edges within the graph should be 7", 7, acyclic.E());
-		assertEquals("Number of edges within the graph should be 9", 9, cycle.E());
+		directAcyclicGraph();
+		assertEquals("Number of edges within the graph should be", 7, acyclic.E());
+		assertEquals("Number of edges within the graph should be", 9, cycle.E());
+		assertEquals("Number of verices within the graph should be", 9, directAcyclic.E());
 	}
 	
 	//test the number of vertices within a graph
@@ -58,8 +61,10 @@ public class DAGTest {
 	public void testV(){
 		acyclicGraph();
 		cycleGraph();
-		assertEquals("Number of vertices within the graph should be 9", 9, acyclic.V());
-		assertEquals("Number of vertices within the graph should be 9", 9, cycle.V());
+		directAcyclicGraph();
+		assertEquals("Number of vertices within the graph should be", 8, acyclic.V());
+		assertEquals("Number of vertices within the graph should be", 9, cycle.V());
+		assertEquals("Number of verices within the graph should be", 9, directAcyclic.V());
 	}
 	
 	//test that the vertex passed through is valid for the graph(Nonnegative
@@ -96,14 +101,21 @@ public class DAGTest {
 		cycleGraph();//has cycle
 		assertFalse(acyclic.hasCycle());//it is acyclic
 		assertTrue(cycle.hasCycle());//there exists a cycle within the graph
+		DAG emptyGraph = new DAG(0);
+		assertFalse(emptyGraph.hasCycle());//No graph therefore no cycle
 	}
 	
 	//test DFS 
 	@Test(expected = IllegalArgumentException.class)
 	public void testDFS(){
-		
+		acyclicGraph();//has no cycle
+		cycleGraph();//has cycle
+		acyclic.DFS(3);//should print [2, 3, 4, 5, 6, 7, 8]
+		cycle.DFS(2);//should print [2, 4, 3, 1, 6, 8]
+		directAcyclic.DFS(5);//should print [5, 7, 8]
 	}
-  //Testing the LCA method, will test for various problems that may arise
+	
+ 	//Testing the LCA method, will test for various problems that may arise
 	@Test(expected = IllegalArgumentException.class) 
 	public void testLCA(){
 		//test the lca for both acyclic and cycled graph using two vertices
@@ -119,17 +131,36 @@ public class DAGTest {
 	
 	//function to create an acyclic graph that I will use in the tests
 	public void acylcicGraph(){
+		//1->2->3->4->5->6->7
 		acyclic.addEdge(0, 1);
+		acyclic.addEdge(1, 2);
 		acyclic.addEdge(2, 3);
 		acyclic.addEdge(3, 4);
 		acyclic.addEdge(4, 5);
 		acyclic.addEdge(5, 6);
 		acyclic.addEdge(6, 7);
-		acyclic.addEdge(7, 8);
+	}
+	
+	public void directAcyclicGraph(){
+		//  -> 1 -> 3 -> 5 ->
+		//0    ^              7 -> 8             
+		//  -> 2 -> 4 -> 6 ->      
+		directAcyclic.addEdge(0, 1);
+		directAcyclic.addEdge(0, 2);
+		directAcyclic.addEdge(1, 3);
+		directAcyclic.addEdge(2, 4);
+		directAcyclic.addEdge(3, 5);
+		directAcyclic.addEdge(4, 6);
+		directAcyclic.addEdge(5, 7);
+		directAcyclic.addEdge(6, 7);
+		directAcyclic.addEdge(7, 8);
 	}
 	
 	//function to create an graph(that cycles) that I will use in the tests
 	public void cycleGraph(){
+		//  -> 1    <- 3 -> 6 -> 8 
+		//0    ->      ^         ^
+		//  ->    2 -> 4         7
 		cycle.addEdge(0, 1);
 		cycle.addEdge(0, 2);
 		cycle.addEdge(1, 2);
