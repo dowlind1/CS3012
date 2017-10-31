@@ -28,9 +28,12 @@ public class DAGTest {
 	}
 	
 	//Test the adjacency array
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void testAdj(){
-		
+		acyclicGraph();//has no cycle
+		cycleGraph();//has cycle
+		assertEquals("","[4]", acyclic.adj(3).toString());
+		assertEquals("","[1, 6]", cycle.adj(3).toString());
 	}
 	
 	//test the amount of edges with in a graph
