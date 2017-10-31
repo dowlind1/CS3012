@@ -1,0 +1,82 @@
+public class DAG{
+    //constructor to initialize and empty graph with size V
+    public DAG(int V){
+        if(V<0){
+            throw new IllegalArgumentException("Number of vertices in the DAG must be greater than 0.");
+        }
+        else{
+        
+        }
+    }
+    
+    //returns number of vertices in DAG
+    public int V(){
+    
+    }
+    
+    //returns number of edges in DAG
+    public int E(){
+    
+    }
+    
+    //throws illegal exception if the vertex put in, is out of bounds
+    private void validateVertex(int v){
+        if((v<0)||(v>=V)){
+            throw new IllegalArgumentException("Edgesless than one means no verices are joined, and if there is a cycle it cannot be moved");
+        }
+    }
+    
+    //adds directed edge from v to w
+    public void addEdge(int v, int w){
+    
+    }
+    
+    //Removes an edge from v to w
+    public void removeEdge(int v, int w){
+    
+    }
+    
+    //returns the number of directed edges out of vertex v
+    public int outdegree(int v){
+    
+    }
+    
+    //returns the number of directed edges into vertex v
+    public int indegree(int v){
+    
+    }
+    
+    //returns the vertices adjacent from vertex v
+    public Iterable<Integer> adj(int v){
+    
+    }
+    
+    //returns true if the graph contains acycle, else false
+    public boolean hasCycle(){
+    
+    }
+    
+    //checks to see if the graph is acyclic
+    private boolean isCyclic(int v, boolean marked[], int parent){
+    
+    }
+    
+    //the function to do a DFS traversal, using recursion
+    public void DFS(int v){
+    
+    }
+    
+    private void DFS(int v, boolean[] marked){
+    
+    }
+    
+    //prints BFS traversal from a given source s
+    private void BFS(int s){
+    
+    }
+    
+    //reverse the BFS traversal
+    private void reverseBFS(){
+
+    }
+}
