@@ -24,7 +24,11 @@ public class DAGTest {
 	//Test the outdegree of a vertex in the graph
 	@Test(expected = IllegalArgumentException.class)
 	public void testOutdegree(){
-		
+		acyclicGraph();//has no cycle
+		cycleGraph();//has cycle
+		assertEquals("", null, acyclic.outdegree(9));//fails due the exception thrown	
+		assertEquals("", 1, acyclic.outdegree(0));	
+		assertEquals("", 2, cycle.outdegree(0));
 	}
 	
 	//Test the adjacency array
