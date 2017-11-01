@@ -4,6 +4,7 @@ public class DAG{
         private int[][] adj; //adjacency list for vertex v - changed to 2D array
 	private int[] outdegree;//outdegree of vertex v
         private int[] indegree; // indegree of vertex v
+	private int[] visited;  //vertices that have been visited
        
     //constructor to initialize and empty graph with size V
     public DAG(int V){
@@ -16,7 +17,7 @@ public class DAG{
             indegree = new boolean[V];
             indegree = new int[V];
 	    outdegree = new int[V];
-       	    marked = new boolean[V];
+	    visited = new int[V];
 	    adj = new int[V][V];
 	    for(int i = 0; i<V; i++){//sets up an empty graph in 2D array
 		for(int j=0;j<V;j++){
@@ -109,22 +110,55 @@ public class DAG{
 	}
     }
     
-    //the function to do a DFS traversal, using recursion
-    public void DFS(int v){
-    
+    //This public function is used to find the lowest commond ancestor in a directed acyclic graph
+    public int findLCA(int v, int w){
+	validateVertex(v);
+	validateVertex(w);
+	hasCycle();
+	if(E>0 && !hasCycle){
+		return LCAUtil(v,w);
+	}
+	else{
+		throw new IllegalArgumentException("This graph is not an acyclic graph.");
+	}
     }
     
-    private void DFS(int v, boolean[] marked){
+    //helper function for LCA
+    private int LCAUtil(int v, int w){
+	int[] vArr = new int[E];
+	int[] wArr = new int[E];
+	boolean[] vMarked = new boolean[V];
+	boolean[] wMarked = new boolean[V];
+	int vCount =0;
+	int wCount = 0;
+	vArr[vCount]=v;
+	wArr[wCount]=w;
+	for(int j=0; j<V;j++){//mark all vertices as not been visited yet
+		vMarked[j]=false;
+		wMarked[j]=false;
+	}
+	for(int i =0;i<V;i++){
+		vMarked[v] =true;
+		wMarked[w] =true;
+		for(int j = 0; j<V;j++){
+			if(adj[i][j]==1 && vMarked[i]){
+				vCount++;
+				vArr[vCount]=j;
+				vMarked[j]=true;
+			}
+			if(adj[i][j]==1 && wMarked[i]){
+				wCount++;
+				wArr[wCount]=j;
+				wMarked[j]=true;
+			}
+			if(wArr[wCount]==vArr[vCount]){
+				return wArr[wCount];
+			}
+		}
+	}
+	return -1;//returns -1 if no ancestor found
+   }
+	
     
-    }
-    
-    //prints BFS traversal from a given source s
-    private void BFS(int s){
-    
-    }
-    
-    //reverse the BFS traversal
-    private void reverseBFS(){
-
-    }
+   
 }
