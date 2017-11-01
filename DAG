@@ -65,12 +65,14 @@ public class DAG{
     
     //returns the number of directed edges out of vertex v
     public int outdegree(int v){
-    
+    	validateVertex(v);
+	return outdegree[v];
     }
     
     //returns the number of directed edges into vertex v
     public int indegree(int v){
-    
+   	validateVertex(v);
+	return indegree[v];
     }
     
     //returns the vertices adjacent from vertex v
