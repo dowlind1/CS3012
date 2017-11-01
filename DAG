@@ -1,22 +1,33 @@
 public class DAG{
+        private int V;//# of vertices in graph
+        private int E;//# of edges in graph
+        private ArrayList<Integer>[] adj; //adjacency list for vertex v
+        private int[] indegree; // indegree of vertex v
+       
     //constructor to initialize and empty graph with size V
     public DAG(int V){
         if(V<0){
             throw new IllegalArgumentException("Number of vertices in the DAG must be greater than 0.");
         }
         else{
-        
+            this.V = V;
+            this.E = 0;
+            indegree = new boolean[V];
+            adj = new ArrayList[V];//set up empty Graph
+            for(int v = 0; v<V;v++){
+                adj[v] = new ArrayList<Integer>():
+            }
         }
     }
     
     //returns number of vertices in DAG
     public int V(){
-    
+        return V;
     }
     
     //returns number of edges in DAG
     public int E(){
-    
+        return E;
     }
     
     //throws illegal exception if the vertex put in, is out of bounds
@@ -28,12 +39,20 @@ public class DAG{
     
     //adds directed edge from v to w
     public void addEdge(int v, int w){
-    
+        validateVertex(v);
+		validateVertex(w);
+		adj[v].add(w);
+		indegree[w]++;
+		E++;
     }
     
     //Removes an edge from v to w
     public void removeEdge(int v, int w){
-    
+        validateVertex(v);
+		validateVertex(w);
+		adj[v].remove(w);
+		indegree[w]--;
+		E--;
     }
     
     //returns the number of directed edges out of vertex v
