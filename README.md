@@ -40,5 +40,7 @@ Test for the following:
 
 4. To see if there is a cycle with in the graph(Looking for an acyclic graph)
 
-5. Test for the depth-first search method to traverse
+5. LCA test
+
+The class DAG produced, I feel will have a high run time. I felt the code cover done in the testing stage was suffice for the code produced. I can look to improve this at a later stage and maybe include generic types.
 
