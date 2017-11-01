@@ -47,11 +47,11 @@ public class DAG{
     //adds directed edge from v to w
     public void addEdge(int v, int w){
         validateVertex(v);
-		validateVertex(w);
-		adj[v][w]=1;
-		indegree[w]++;
-		outdegree[v]=++;
-		E++;
+	validateVertex(w);
+	adj[v][w]=1;
+	indegree[w]++;
+	outdegree[v]=++;
+	E++;
     }
     
     //Removes an edge from v to w
@@ -157,8 +157,5 @@ public class DAG{
 		}
 	}
 	return -1;//returns -1 if no ancestor found
-   }
-	
-    
-   
+   }  
 }
