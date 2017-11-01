@@ -1,7 +1,8 @@
 public class DAG{
         private int V;//# of vertices in graph
         private int E;//# of edges in graph
-        private ArrayList<Integer>[] adj; //adjacency list for vertex v
+        private int[][] adj; //adjacency list for vertex v - changed to 2D array
+	private int[] outdegree;//outdegree of vertex v
         private int[] indegree; // indegree of vertex v
        
     //constructor to initialize and empty graph with size V
@@ -13,10 +14,15 @@ public class DAG{
             this.V = V;
             this.E = 0;
             indegree = new boolean[V];
-            adj = new ArrayList[V];//set up empty Graph
-            for(int v = 0; v<V;v++){
-                adj[v] = new ArrayList<Integer>():
-            }
+            indegree = new int[V];
+	    outdegree = new int[V];
+       	    marked = new boolean[V];
+	    adj = new int[V][V];
+	    for(int i = 0; i<V; i++){//sets up an empty graph in 2D array
+		for(int j=0;j<V;j++){
+		    adj[i][j] = 0;
+		}
+	    }
         }
     }
     
@@ -41,18 +47,20 @@ public class DAG{
     public void addEdge(int v, int w){
         validateVertex(v);
 		validateVertex(w);
-		adj[v].add(w);
+		adj[v][w]=1;
 		indegree[w]++;
+		outdegree[v]=++;
 		E++;
     }
     
     //Removes an edge from v to w
     public void removeEdge(int v, int w){
         validateVertex(v);
-		validateVertex(w);
-		adj[v].remove(w);
-		indegree[w]--;
-		E--;
+	validateVertex(w);
+	adj[v][w]=0;
+	indegree[w]--;
+	outdegree[v]--;
+	E--;
     }
     
     //returns the number of directed edges out of vertex v
@@ -66,8 +74,17 @@ public class DAG{
     }
     
     //returns the vertices adjacent from vertex v
-    public Iterable<Integer> adj(int v){
-    
+    public int[] adj(int v){
+    	validateVertex(v);
+	int[] temp = new int[outdegree[v]];
+	int count =0;
+	for(int i=0;i<V;i++){
+	    if(adj[v][i]==1){
+		temp[count]=i;
+		count++;
+    	    }
+	}
+	return temp;
     }
     
     //returns true if the graph contains acycle, else false
