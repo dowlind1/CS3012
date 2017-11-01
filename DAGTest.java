@@ -41,8 +41,8 @@ public class DAGTest {
 	public void testAdj(){
 		acyclicGraph();//has no cycle
 		cycleGraph();//has cycle
-		assertEquals("Adjacency array of 3 only travels to one vertex","[4]", acyclic.adj(3).toString());
-		assertEquals("Adjacency array of 3 in a cycle graph has two outdegrees to one and six","[1, 6]", cycle.adj(3).toString());
+		assertArrayEquals(new int[]{4}, acyclic.adj(3));//Adjacency array of 3 only travels to one vertex
+		assertArrayEquals(new int[]{1,6}, cycle.adj(3));//Adjacency array of 3 in a cycle graph has two outdegrees to one and six
 	}
 	
 	//test the amount of edges with in a graph
@@ -90,7 +90,7 @@ public class DAGTest {
 		acyclic.addEdge(5, 8);
 		assertEquals("Number of edges for DAG should increase to", 8, acyclic.E());
 		acyclic.addEdge(-1, -1);
-		assertEquals("This should do nothing as an exception is thrown, once the values are validated", null, acyclic.E());
+		assertEquals("This should do nothing as an exception is thrown, once the values are validated", 0, acyclic.E());
 	}
 	
 	//test that the graph is acyclic, if there is a cycle the method will throw true that there is a cycle
@@ -99,34 +99,35 @@ public class DAGTest {
 	public void testCycle(){
 		acyclicGraph();//has no cycle
 		cycleGraph();//has cycle
+		directAcyclicGraph();//acyclic
 		assertFalse(acyclic.hasCycle());//it is acyclic
 		assertTrue(cycle.hasCycle());//there exists a cycle within the graph
+		assertFalse(directAcyclic.hasCycle());//there exists a cycle within the graph
 		DAG emptyGraph = new DAG(0);
 		assertFalse(emptyGraph.hasCycle());//No graph therefore no cycle
-	}
-	
-	//test DFS 
-	@Test(expected = IllegalArgumentException.class)
-	public void testDFS(){
-		acyclicGraph();//has no cycle
-		cycleGraph();//has cycle
-		acyclic.DFS(3);//should print [2, 3, 4, 5, 6, 7, 8]
-		cycle.DFS(2);//should print [2, 4, 3, 1, 6, 8]
-		directAcyclic.DFS(5);//should print [5, 7, 8]
 	}
 	
  	//Testing the LCA method, will test for various problems that may arise
 	@Test(expected = IllegalArgumentException.class) 
 	public void testLCA(){
+		acyclicGraph();
+		cycleGraph();
+		directAcyclicGraph();
 		//test the lca for both acyclic and cycled graph using two vertices
 		assertEquals("Can be its own ancestor", 3, acyclic.findLCA(2, 3));
-		assertEquals("The cycle should revert back around", 1, cycle.findLCA(1, 4));
+		assertEquals("Because it is cyclic it will throw an exception", 1, cycle.findLCA(1, 4));
+		//showing different levels within the graph
 		assertEquals("", 7, directAcyclic.findLCA(3, 4));
+		assertEquals("", 7, directAcyclic.findLCA(1, 4));
+		assertEquals("", 7, directAcyclic.findLCA(5, 2));
+		//swapping around the vertices v and w
+		assertEquals("", 5, directAcyclic.findLCA(1, 5));
+		assertEquals("", 5, directAcyclic.findLCA(5, 1));
 		//same v as w
 		assertEquals("Can be its own ancestor", 3, acyclic.findLCA(3, 3));
 		//empty graph
-		DAG validTest = new DAG(0);
-		assertEquals("Can be its own ancestor", null, acyclic.findLCA(3, 3));//should throw exception
+		DAG emptyG = new DAG(0);
+		assertEquals("Should throw exception", null, acyclic.findLCA(3, 3));
 	}
 	
 	//function to create an acyclic graph that I will use in the tests
